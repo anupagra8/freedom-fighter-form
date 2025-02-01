@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>स्वतंत्रता सेनानी उत्तराधिकारी परिवार समिति (रजि.)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            text-align: center;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>स्वतंत्रता सेनानी उत्तराधिकारी परिवार समिति (रजि.)</h2>
+    <form id="freedomFighterForm">
+        <label>नाम:</label>
+        <input type="text" id="name" required>
+
+        <label>स्वतंत्रता सेनानी का नाम:</label>
+        <input type="text" id="freedomFighterName" required>
+
+        <label>संबंध:</label>
+        <select id="relation" required>
+            <option value="">चुनें...</option>
+            <option value="पुत्र">पुत्र</option>
+            <option value="पुत्री">पुत्री</option>
+            <option value="पोता">पोता</option>
+            <option value="पोती">पोती</option>
+            <option value="नाती">नाती</option>
+            <option value="नातिन">नातिन</option>
+            <option value="पंती">पंती</option>
+            <option value="पंतन">पंतन</option>
+        </select>
+
+        <label>पता:</label>
+        <input type="text" id="address" required>
+
+        <label>जिला:</label>
+        <select id="district" required>
+            <option value="">चुनें...</option>
+            <option value="Chhatarpur">छतरपुर</option>
+            <option value="Burhanpur">बुरहानपुर</option>
+            <option value="Satna">सतना</option>
+            <option value="Rewa">रीवा</option>
+            <option value="Gwalior">ग्वालियर</option>
+            <option value="Other">अन्य</option>
+        </select>
+
+        <label>प्रान्त:</label>
+        <select id="state" required>
+            <option value="मध्य प्रदेश">मध्य प्रदेश</option>
+            <option value="अन्य">अन्य</option>
+        </select>
+
+        <label>मोबाइल नं.:</label>
+        <input type="tel" id="mobile" required pattern="[0-9]{10}">
+
+        <label>संगठन जिससे आप जुड़े हैं:</label>
+        <input type="text" id="organization">
+
+        <button type="submit">सबमिट करें</button>
+    </form>
+
+    <script>
+        document.getElementById("freedomFighterForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var formData = {
+                name: document.getElementById("name").value,
+                freedomFighterName: document.getElementById("freedomFighterName").value,
+                relation: document.getElementById("relation").value,
+                address: document.getElementById("address").value,
+                district: document.getElementById("district").value,
+                state: document.getElementById("state").value,
+                mobile: document.getElementById("mobile").value,
+                organization: document.getElementById("organization").value
+            };
+
+            fetch("https://script.google.com/macros/s/AKfycbyp7VbxTiA4BfRaQGkbUCSSifRyySoXK0ChB4y3ooA5n42Kk_QvYKwsGO5NQPAMUgQIuQ/exec", {
+                method: "POST",
+                body: JSON.stringify(formData),
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert("डेटा सफलतापूर्वक सबमिट हो गया!");
+                document.getElementById("freedomFighterForm").reset();
+            })
+            .catch(error => alert("त्रुटि हुई: " + error));
+        });
+    </script>
+
+</body>
+</html>
